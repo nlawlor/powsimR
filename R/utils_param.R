@@ -120,8 +120,9 @@
   if(RNAseq == 'singlecell') {
     # create SingleCellExperiment
     sce <- SingleCellExperiment::SingleCellExperiment(assays = list(counts = as.matrix(countData)))
-    # apply quality filters
-    sce <- scater::calculateQCMetrics(sce, nmads = 3)
+    # apply quality filters (remove nmads argument)
+    # sce <- scater::calculateQCMetrics(sce, nmads = 3)
+    sce <- scater::calculateQCMetrics(sce)
     # define outlier cells
     libsize.drop <- scater::isOutlier(sce$total_counts, nmads=3, type="both", log=TRUE)
     feature.drop <- scater::isOutlier(sce$total_features, nmads=3, type="both", log=TRUE)
